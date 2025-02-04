@@ -91,7 +91,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-<<<<<<< HEAD
             <dependency>
                 <groupId>org.modelmapper</groupId>
                 <artifactId>modelmapper</artifactId>
@@ -102,8 +101,6 @@
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>2.1.0</version>
             </dependency>
-=======
->>>>>>> developer_Matheus/feat/implementar-classe-user
         </dependencies>
     </dependencyManagement>
 
