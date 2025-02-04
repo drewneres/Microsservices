@@ -25,4 +25,22 @@ public class CommentService {
     public List<Comment> getAll() {
         return commentRepository.findAll();
     }
+
+    public Comment create(Comment comment) {
+        try{
+            return commentRepository.save(comment);
+        }
+        catch (Exception e){
+            throw new RuntimeException("Id do cometario ja existente");
+        }
+    }
+
+    //Passar o Dto para atualizar só o body e name
+    public Comment update(Comment comment) {
+        return commentRepository.save(comment);
+    }
+
+    public void deleteById(int id) {
+        commentRepository.deleteById(id);
+    }
 }
