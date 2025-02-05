@@ -2,6 +2,7 @@ package org.compass.desafio2.client;
 
 import org.compass.desafio2.entity.Comment;
 import org.compass.desafio2.entity.Post;
+import org.compass.desafio2.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,4 +20,10 @@ public interface JsonPlaceholderClient {
 
     @GetMapping("/posts/{id}/comments")
     List<Comment> getCommentsByPostId(@PathVariable("id") Long id);
+
+    @GetMapping("/comments")
+    List<Comment> getAllComments();
+
+    @GetMapping("/users")
+    List<User> getAllUsers();
 }

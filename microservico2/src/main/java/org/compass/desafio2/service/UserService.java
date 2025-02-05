@@ -18,8 +18,8 @@ public class UserService {
         return jsonPlaceholderClient.getAllUsers();
     }
 
-    @Transactional(readOnly = true)
-    public User getUserById(Long id) {
-        return jsonPlaceholderClient.getUserById(id);
-    }
+//    @Transactional(readOnly = true)
+//    public User getUserById(Long id) {
+//        return jsonPlaceholderClient.getUserById(id);
+//    }
 }
