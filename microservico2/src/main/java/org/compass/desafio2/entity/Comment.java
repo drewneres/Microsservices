@@ -3,40 +3,28 @@ package org.compass.desafio2.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-import java.util.Objects;
-
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
-@Table(name = "comment")
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
-public class Comment implements Serializable {
-
+@Table(name = "tb_comments")
+public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+
+    @Column(name = "post_id")
+    private Long postId;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "email")
     private String email;
-    @Column(name = "body")
+
+    @Column(length = 1000)
     private String body;
 
-    //@OneToMany
-    //private Post post;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Comment comment = (Comment) o;
-        return id == comment.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+    public Comment() {}
 }
