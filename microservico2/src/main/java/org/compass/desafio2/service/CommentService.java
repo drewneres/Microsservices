@@ -1,7 +1,7 @@
-package org.compass.desafio2.servico;
+package org.compass.desafio2.service;
 
 import lombok.RequiredArgsConstructor;
-import org.compass.desafio2.entidade.Comment;
+import org.compass.desafio2.entity.Comment;
 import org.compass.desafio2.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

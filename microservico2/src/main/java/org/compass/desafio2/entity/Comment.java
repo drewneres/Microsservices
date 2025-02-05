@@ -1,4 +1,4 @@
-package org.compass.desafio2.entidade;
+package org.compass.desafio2.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

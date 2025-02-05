@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients  // Habilita o Feign
+@EnableFeignClients
 @SpringBootApplication
-public class Desafio2Application {
+public class MicrosservicoBApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Desafio2Application.class, args);
+        SpringApplication.run(MicrosservicoBApplication.class, args);
     }
 }

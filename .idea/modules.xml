@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/microservico1/Desafio2.iml" filepath="$PROJECT_DIR$/microservico1/Desafio2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Desafio2_404-Grupo-n-o-encontrado.iml" filepath="$PROJECT_DIR$/.idea/Desafio2_404-Grupo-n-o-encontrado.iml" />
     </modules>
   </component>

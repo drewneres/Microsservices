@@ -1,18 +1,19 @@
-package org.compass.desafio2.servico;
+package org.compass.desafio2.service;
 
-import org.compass.desafio2.cliente.JsonPlaceholderClient;
-import org.compass.desafio2.entidade.Post;
+import org.compass.desafio2.client.JsonPlaceholderClient;
+import org.compass.desafio2.entity.Comment;
+import org.compass.desafio2.entity.Post;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PostServico {
+public class PostService {
 
     private final JsonPlaceholderClient jsonPlaceholderClient;
 
 
-    public PostServico(JsonPlaceholderClient jsonPlaceholderClient) {
+    public PostService(JsonPlaceholderClient jsonPlaceholderClient) {
         this.jsonPlaceholderClient = jsonPlaceholderClient;
     }
 
@@ -24,5 +25,8 @@ public class PostServico {
         return jsonPlaceholderClient.getPostById(id);
     }
 
+    public List<Comment> getAllCommentsByPostId(Long id) {
+        return jsonPlaceholderClient.getCommentsByPostId(id);
+    }
 
 }

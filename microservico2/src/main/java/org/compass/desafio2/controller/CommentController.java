@@ -1,17 +1,16 @@
-package org.compass.desafio2.controlador;
+package org.compass.desafio2.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.compass.desafio2.entidade.Comment;
-import org.compass.desafio2.servico.CommentService;
+import org.compass.desafio2.entity.Comment;
+import org.compass.desafio2.service.CommentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/posts/{id}/comments")
+@RequestMapping("/posts/{postId}/comments")
 @RequiredArgsConstructor
 public class CommentController {
 
