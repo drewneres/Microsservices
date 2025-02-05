@@ -14,12 +14,12 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    @Transactional(readOnly = true)
-    public Comment getById(int id) {
-        return commentRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Comment id not found")
-        );
-    }
+//    @Transactional(readOnly = true)
+//    public Comment getById(Long id) {
+//        return commentRepository.findById(id).orElseThrow(
+//                () -> new RuntimeException("Comment id not found")
+//        );
+//    }
 
     @Transactional(readOnly = true)
     public List<Comment> getAll() {
@@ -36,11 +36,11 @@ public class CommentService {
     }
 
     //Passar o Dto para atualizar só o body e name
-    public Comment update(Comment comment) {
-        return commentRepository.save(comment);
-    }
-
-    public void deleteById(int id) {
-        commentRepository.deleteById(id);
-    }
+//    public Comment update(Comment comment) {
+//        return commentRepository.save(comment);
+//    }
+//
+//    public void deleteById(int id) {
+//        commentRepository.deleteById(id);
+//    }
 }

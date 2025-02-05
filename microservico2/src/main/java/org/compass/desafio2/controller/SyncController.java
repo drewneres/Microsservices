@@ -20,4 +20,10 @@ public class SyncController {
         syncService.syncPosts();
         return "Posts synchronized successfully!";
     }
+
+    @PostMapping("/comments")
+    public String syncComments() {
+        syncService.syncComments();
+        return "Comments synchronized successfully!";
+    }
 }
