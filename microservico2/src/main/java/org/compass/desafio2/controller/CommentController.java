@@ -2,8 +2,11 @@ package org.compass.desafio2.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.compass.desafio2.client.JsonPlaceholderClient;
 import org.compass.desafio2.entity.Comment;
 import org.compass.desafio2.service.CommentService;
+import org.compass.desafio2.web.dto.CommentDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,8 @@ import java.util.List;
 public class CommentController {
 
     private final CommentService commentService;
+
+    private final JsonPlaceholderClient jsonPlaceholderClient;
 
     @GetMapping("/{id}")
     public ResponseEntity<Comment> getById(Long id) {
@@ -33,23 +38,21 @@ public class CommentController {
         return ResponseEntity.ok(commentService.create(comment));
     }
 
-//    @DeleteMapping
-//    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-//        try{
-//            commentService.deleteById(id);
-//            return ResponseEntity.noContent().build();
-//        }
-//        catch(Exception e) {
-//            throw new RuntimeException("Post de Id nao encontrado");
-//        }
-//    }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Comment> update(@PathVariable Integer id, @RequestBody @Valid Comment comment) {
-//        Comment oldComment = commentService.getById(id);
-//        comment.setId(oldComment.getId());
-//        commentService.update(comment);
-//        return ResponseEntity.ok(comment);
-//    }
+   @DeleteMapping("/{id}")
+   public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+      try{
+           commentService.deleteById(id);
+          return ResponseEntity.noContent().build();
+       }
+       catch(Exception e) {
+            throw new RuntimeException("Post de Id nao encontrado");
+       }
+  }
+
+  @PutMapping("/{id}")
+    public ResponseEntity<Comment> update(@PathVariable Long id, @RequestBody @Valid CommentDto commentDto) {
+        Comment comment = commentService.updateComment(id, commentDto.getName(), commentDto.getBody());
+        return ResponseEntity.ok(comment);
+  }
 
 }
