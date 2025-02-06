@@ -21,7 +21,7 @@ Este projeto consiste em dois microsserviços (**Microsserviço A** e **Microsse
 ## Pré-requisitos
 - Java 17
 - Maven 3.9+
-- MongoDB (ou H2 para banco em memória)
+- H2 DB
 - Postman/cURL (para teste dos endpoints)
 - IDE (IntelliJ, Eclipse, VS Code)
 
