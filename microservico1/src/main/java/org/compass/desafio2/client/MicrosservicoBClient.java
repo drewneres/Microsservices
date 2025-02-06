@@ -33,9 +33,9 @@ public interface MicrosservicoBClient {
     @PutMapping("/api/posts/{id}")
     Post updatePost(@PathVariable Long id, @RequestBody Post post);
 
-    // PATCH (atualização parcial)
-    @PatchMapping("/api/posts/{id}")
-    Post patchPost(@PathVariable Long id, @RequestBody Map<String, Object> updates);
+//    // PATCH (atualização parcial)
+//    @PatchMapping("/api/posts/{id}")
+//    Post patchPost(@PathVariable Long id, @RequestBody Map<String, Object> updates);
 
     // DELETE
     @DeleteMapping("/api/posts/{id}")

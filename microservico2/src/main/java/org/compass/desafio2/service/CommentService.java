@@ -14,12 +14,12 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-//    @Transactional(readOnly = true)
-//    public Comment getById(Long id) {
-//        return commentRepository.findById(id).orElseThrow(
-//                () -> new RuntimeException("Comment id not found")
-//        );
-//    }
+    @Transactional(readOnly = true)
+    public Comment getById(Long id) {
+        return commentRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Comment id not found")
+        );
+    }
 
     @Transactional(readOnly = true)
     public List<Comment> getAll() {

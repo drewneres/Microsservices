@@ -42,4 +42,27 @@ public class PostService {
     public List<Comment> getAllCommentsByPostId(Long id) {
         return commentRepository.findAll();
     }
+
+    public Post savePost(Post post) {
+        return postRepository.save(post);
+    }
+
+    public Post updatePost(Long id, Post updatedPost) {
+        return postRepository.findById(id)
+                .map(post -> {
+                    post.setTitle(updatedPost.getTitle());
+                    post.setBody(updatedPost.getBody());
+                    return postRepository.save(post);
+                })
+                .orElse(null);
+    }
+
+    public void deletePost(Long id) {
+        if (postRepository.existsById(id)) {
+            postRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Post com o ID não encontrado: " + id);
+        }
+    }
+
 }
