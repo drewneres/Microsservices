@@ -31,7 +31,7 @@ Este projeto consiste em dois microsserviços (**Microsserviço A** e **Microsse
 
 ### 1. Clone o Repositório
 ```bash
-git clone https://github.com/seu-usuario/desafio2.git
+git clone https://github.com/Guerra457/Desafio2_404-Grupo-n-o-encontrado
 ```
 ### 2. Microsserviço B (Porta 8081)
 ```bash
