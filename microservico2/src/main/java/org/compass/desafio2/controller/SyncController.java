@@ -26,4 +26,10 @@ public class SyncController {
         syncService.syncComments();
         return "Comments synchronized successfully!";
     }
+
+    @PostMapping("/users")
+    public String syncUsers() {
+        syncService.syncUsers();
+        return "Users synchronized successfully!";
+    }
 }
