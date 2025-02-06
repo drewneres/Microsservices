@@ -5,6 +5,8 @@ import org.compass.desafio2.entity.Comment;
 import org.compass.desafio2.entity.Post;
 import org.compass.desafio2.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,8 +40,9 @@ public class PostController {
     }
 
     @PostMapping
-    public Post createPost(@RequestBody Post post) {
-        return postService.savePost(post);
+    public ResponseEntity<Post> createPost(@RequestBody Post post) {
+        Post savedPost = postService.savePost(post);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedPost); // Retorna 201 CREATED
     }
 
     @PutMapping("/{id}")
