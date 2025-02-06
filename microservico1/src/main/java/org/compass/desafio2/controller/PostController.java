@@ -41,12 +41,12 @@ public class PostController {
     public Post updatePost(@PathVariable Long id, @RequestBody Post post) {
         return microsservicoBClient.updatePost(id, post);
     }
-
-    // PATCH (Atualizar Parcialmente o Post)
-    @PatchMapping("/{id}")
-    public Post patchPost(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
-        return microsservicoBClient.patchPost(id, updates);
-    }
+//
+//    // PATCH (Atualizar Parcialmente o Post)
+//    @PatchMapping("/{id}")
+//    public Post patchPost(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
+//        return microsservicoBClient.patchPost(id, updates);
+//    }
 
     // DELETE (Excluir Post)
     @DeleteMapping("/{id}")
