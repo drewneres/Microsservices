@@ -26,4 +26,7 @@ public interface JsonPlaceholderClient {
 
     @GetMapping("/users")
     List<User> getAllUsers();
+
+    @GetMapping("/users/{id}")
+    User getUserById(@PathVariable("id") Long id);
 }
