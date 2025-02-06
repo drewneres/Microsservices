@@ -64,11 +64,9 @@ spring.h2.console.enabled=true
 
 #### Endpoints
 #### Microsserviço A (Porta 8080)
-Método	Endpoint	Descrição
 ![image](https://github.com/user-attachments/assets/b2636195-a52e-48e5-9e7b-010348ad3412)
 
 #### Microsserviço B (Porta 8081)
-Método	Endpoint	Descrição
 ![image](https://github.com/user-attachments/assets/93829131-e962-43fe-9404-973d591ca51b)
 
 ### Testando os Endpoints
