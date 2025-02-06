@@ -40,13 +40,8 @@ public class CommentController {
 
    @DeleteMapping("/{id}")
    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-      try{
-           commentService.deleteById(id);
-          return ResponseEntity.noContent().build();
-       }
-       catch(Exception e) {
-            throw new RuntimeException("Post de Id nao encontrado");
-       }
+        commentService.deleteById(id);
+        return ResponseEntity.noContent().build();
   }
 
   @PutMapping("/{id}")

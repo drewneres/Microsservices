@@ -4,8 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.compass.desafio2.client.JsonPlaceholderClient;
 import org.compass.desafio2.entity.Comment;
 import org.compass.desafio2.entity.Post;
+import org.compass.desafio2.exception.EntityNotFoundException;
+import org.compass.desafio2.exception.UniqueViolationException;
 import org.compass.desafio2.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +31,7 @@ public class CommentService {
     @Transactional(readOnly = true)
     public Comment getById(Long id) {
         return commentRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Comment id not found")
+                () -> new EntityNotFoundException("Comment id not found")
         );
     }
 
@@ -38,22 +41,29 @@ public class CommentService {
     }
 
     public Comment create(Comment comment) {
-        try{
+        try {
             return commentRepository.save(comment);
-        }
-        catch (Exception e){
-            throw new RuntimeException("Id do cometario ja existente");
+        } catch (RuntimeException e) {
+            throw new UniqueViolationException("Comment Id already exists");
         }
     }
 
     public void deleteById(Long id) {
-        commentRepository.deleteById(id);
+        try {
+            commentRepository.deleteById(id);
+        } catch (RuntimeException e) {
+            throw new EntityNotFoundException("Comment not found");
+        }
     }
 
     public Comment updateComment(Long id, String name, String body) {
-        getById(id).setName(name);
-        getById(id).setBody(body);
-        return commentRepository.save(getById(id));
+        try {
+            getById(id).setName(name);
+            getById(id).setBody(body);
+            return commentRepository.save(getById(id));
+        } catch (RuntimeException e) {
+            throw new EntityNotFoundException("Comment not found");
+        }
     }
 
 }
