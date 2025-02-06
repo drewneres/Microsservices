@@ -3,6 +3,7 @@ package org.compass.desafio2.controller.exception;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.compass.desafio2.exception.EntityNotFoundException;
+import org.compass.desafio2.exception.UniqueViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,5 +21,14 @@ public class ApiExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.NOT_FOUND, msg));
+    }
+
+    @ExceptionHandler(UniqueViolationException.class)
+    public ResponseEntity<ErrorMessage> uniqueViolation(UniqueViolationException ex, HttpServletRequest request) {
+        log.error("Error - ", ex);
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.CONFLICT, ex.getMessage()));
     }
 }
