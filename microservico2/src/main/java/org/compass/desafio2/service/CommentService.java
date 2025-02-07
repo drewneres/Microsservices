@@ -3,12 +3,9 @@ package org.compass.desafio2.service;
 import lombok.RequiredArgsConstructor;
 import org.compass.desafio2.client.JsonPlaceholderClient;
 import org.compass.desafio2.entity.Comment;
-import org.compass.desafio2.entity.Post;
-import org.compass.desafio2.exception.EntityNotFoundException;
+import org.compass.desafio2.exception.NotFoundException;
 import org.compass.desafio2.exception.UniqueViolationException;
 import org.compass.desafio2.repository.CommentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +28,7 @@ public class CommentService {
     @Transactional(readOnly = true)
     public Comment getById(Long id) {
         return commentRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Comment id not found")
+                () -> new NotFoundException("Comment id not found")
         );
     }
 
@@ -52,7 +49,7 @@ public class CommentService {
         try {
             commentRepository.deleteById(id);
         } catch (RuntimeException e) {
-            throw new EntityNotFoundException("Comment not found");
+            throw new NotFoundException("Comment not found");
         }
     }
 
@@ -62,7 +59,7 @@ public class CommentService {
             getById(id).setBody(body);
             return commentRepository.save(getById(id));
         } catch (RuntimeException e) {
-            throw new EntityNotFoundException("Comment not found");
+            throw new NotFoundException("Comment not found");
         }
     }
 
