@@ -3,16 +3,18 @@ package org.compass.desafio2.exception;
 import lombok.Getter;
 
 @Getter
-public class MethodArgumentTypeMismatchException extends RuntimeException {
+public class BadRequestException extends RuntimeException {
     private String resource;
     private String code;
+    private String msg;
 
-    public MethodArgumentTypeMismatchException(String msg) {
+    public BadRequestException(String msg) {
         super(msg);
+        this.msg = msg;
     }
 
-    public MethodArgumentTypeMismatchException(String resource, String code) {
-        super(code);
+    public BadRequestException(String resource, String code) {
+        super("Recurso " + resource + " com ID " + code + " não encontrado.");
         this.resource = resource;
         this.code = code;
     }
