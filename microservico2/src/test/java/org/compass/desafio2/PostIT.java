@@ -1,6 +1,8 @@
 package org.compass.desafio2;
 
+import org.compass.desafio2.controller.exception.ErrorMessage;
 import org.compass.desafio2.entity.Post;
+import org.compass.desafio2.web.dto.PostDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +17,6 @@ public class PostIT {
 
     @Autowired
     private WebTestClient testClient;
-
 
     @Test
     public void buscarPost_ComIdExistente_RetornarPostComStatus200() {
@@ -65,7 +66,6 @@ public class PostIT {
                 .expectStatus().isNoContent();
     }
 
-
     @Test
     public void editarPost_ComDadosInvalidos_RetornarStatus400() {
         Post postInvalido = new Post(1L, 1L, "", "");
@@ -78,7 +78,7 @@ public class PostIT {
                 .exchange()
                 .expectStatus().isBadRequest();
     }
-
+    
     @Test
     public void editarPost_PostInexistente_RetornarStatus404() {
         Post postAtualizado = new Post(999L, 1L, "Título atualizado", "Corpo atualizado"); // ID que não existe
@@ -90,5 +90,5 @@ public class PostIT {
                 .exchange()
                 .expectStatus().isNotFound();
     }
-
+    
 }
