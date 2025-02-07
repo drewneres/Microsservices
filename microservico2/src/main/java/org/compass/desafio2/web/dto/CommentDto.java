@@ -9,11 +9,12 @@ import lombok.Setter;
 
 @Getter @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class CommentDto {
 
     @NotBlank
     private String name;
     @Size(min = 1, max = 1000)
     private String body;
+
 }

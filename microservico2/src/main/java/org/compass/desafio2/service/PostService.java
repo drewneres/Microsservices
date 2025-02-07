@@ -57,11 +57,12 @@ public class PostService {
                 .orElse(null);
     }
 
-    public void deletePost(Long id) {
+    public boolean deletePost(Long id) {
         if (postRepository.existsById(id)) {
             postRepository.deleteById(id);
+            return true;
         } else {
-            throw new RuntimeException("Post com o ID não encontrado: " + id);
+            return false;
         }
     }
 
