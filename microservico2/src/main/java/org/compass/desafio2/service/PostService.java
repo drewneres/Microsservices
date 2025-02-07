@@ -6,6 +6,7 @@ import org.compass.desafio2.entity.Post;
 import org.compass.desafio2.exception.NotFoundException;
 import org.compass.desafio2.repository.CommentRepository;
 import org.compass.desafio2.repository.PostRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +44,10 @@ public class PostService {
     }
 
     public List<Comment> getAllCommentsByPostId(Long id) {
-        return commentRepository.findAll();
+        Post post = postRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Post", String.valueOf(id))
+        );
+        return commentRepository.findByPostId(id);
     }
 
     public Post savePost(Post post) {
