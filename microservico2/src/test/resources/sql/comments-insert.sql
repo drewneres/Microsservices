@@ -1,0 +1,1 @@
+INSERT INTO tb_comments (id, post_id, name, email, body) VALUES (1, 1, 'post 1', 'post@email.com', 'criando comentário');
