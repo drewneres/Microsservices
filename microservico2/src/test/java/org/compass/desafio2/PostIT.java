@@ -51,4 +51,44 @@ public class PostIT {
         assert responseBody.getTitle().equals(postParaCriar.getTitle());
         assert responseBody.getBody().equals(postParaCriar.getBody());
     }
+
+    @Test
+    public void editarPost_ComDadosValidos_RetornarStatus204() {
+        Post postAtualizado = new Post(1L, 1L, "Título atualizado", "Corpo atualizado");
+
+        testClient
+                .put()
+                .uri("/api/posts/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(postAtualizado)
+                .exchange()
+                .expectStatus().isNoContent();
+    }
+
+
+    @Test
+    public void editarPost_ComDadosInvalidos_RetornarStatus400() {
+        Post postInvalido = new Post(1L, 1L, "", "");
+
+        testClient
+                .put()
+                .uri("/api/posts/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(postInvalido)
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
+    @Test
+    public void editarPost_PostInexistente_RetornarStatus404() {
+        Post postAtualizado = new Post(999L, 1L, "Título atualizado", "Corpo atualizado"); // ID que não existe
+        testClient
+                .put()
+                .uri("/api/posts/999") // ID inexistente
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(postAtualizado)
+                .exchange()
+                .expectStatus().isNotFound();
+    }
+
 }

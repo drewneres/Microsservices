@@ -59,12 +59,12 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostDto> updatePost(@PathVariable Long id, @Valid @RequestBody PostDto postDto) {
+    public ResponseEntity<Void> updatePost(@PathVariable Long id, @Valid @RequestBody PostDto postDto) {
         Post updatedPost = postService.updatePost(id, postMapper.toEntity(postDto));
         if (updatedPost != null) {
-            return ResponseEntity.ok(postMapper.toDto(updatedPost));
+            return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.notFound().build();
         }
     }
 
