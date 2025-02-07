@@ -3,6 +3,7 @@ package org.compass.desafio2.service;
 import org.compass.desafio2.client.JsonPlaceholderClient;
 import org.compass.desafio2.entity.Comment;
 import org.compass.desafio2.entity.Post;
+import org.compass.desafio2.exception.NotFoundException;
 import org.compass.desafio2.repository.CommentRepository;
 import org.compass.desafio2.repository.PostRepository;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,9 @@ public class PostService {
     }
 
     public Post getPostById(Long id) {
-        return postRepository.findById(id).orElse(null);
+        return postRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Post", String.valueOf(id))
+        );
     }
 
     public List<Comment> getAllCommentsByPostId(Long id) {

@@ -3,7 +3,7 @@ package org.compass.desafio2.controller.exception;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.compass.desafio2.exception.BadRequestException;
-import org.compass.desafio2.exception.EntityNotFoundException;
+import org.compass.desafio2.exception.NotFoundException;
 import org.compass.desafio2.exception.UniqueViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,8 +16,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<ErrorMessage> entityNotFoundException(EntityNotFoundException ex, HttpServletRequest request) {
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorMessage> notFoundException(NotFoundException ex, HttpServletRequest request) {
         String msg = "Recurso " + ex.getResource() + " com ID " + ex.getCode() + " não encontrado.";
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
