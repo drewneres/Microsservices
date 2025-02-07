@@ -5,7 +5,6 @@ Este projeto consiste em dois microsserviços (**Microsserviço A** e **Microsse
 ---
 
 ## Arquitetura do Sistema
-![Diagrama de Arquitetura](https://via.placeholder.com/800x400.png?text=Diagrama+de+Arquitetura+Microsserviços)
 
 1. **Microsserviço A (Porta 8080)**:
    - Ponto de entrada da aplicação.
