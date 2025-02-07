@@ -16,8 +16,6 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
         <module name="Desafio2" />
-        <module name="Desafio2 (2)" />
-        <module name="Desafio2 (1)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
