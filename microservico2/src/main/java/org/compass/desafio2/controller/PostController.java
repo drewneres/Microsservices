@@ -1,6 +1,12 @@
 package org.compass.desafio2.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+import org.compass.desafio2.controller.exception.ErrorMessage;
 import org.compass.desafio2.entity.Comment;
 import org.compass.desafio2.entity.Post;
 import org.compass.desafio2.service.PostService;
@@ -27,6 +33,12 @@ public class PostController {
         this.postMapper = postMapper;
     }
 
+    @Operation(summary = "Listar todos os posts cadastrados", description = "Recurso para listar todos os posts cadastrados",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Lista com todos os posts cadastrados",
+                            content = @Content(mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = PostDto.class))))
+            })
     @GetMapping
     public ResponseEntity<List<PostDto>> getAllPosts() {
         List<PostDto> posts = postService.getAllPosts().stream()
@@ -35,14 +47,21 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    @Operation(summary = "Recuperar um post pelo id", description = "Recurso para recuperar um post pelo id",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
+                            content = @Content(mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = PostDto.class)))),
+                    @ApiResponse(responseCode = "400", description = "Requisição inválida",
+                            content = @Content(mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class)))),
+                    @ApiResponse(responseCode = "404", description = "Recurso não encontrado",
+                            content = @Content(mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class))))
+            })
     @GetMapping("/{id}")
-    public ResponseEntity<PostDto> getPostById(@PathVariable Long id) {
-        Post post = postService.getPostById(id);
-        if (post != null) {
-            return ResponseEntity.ok(postMapper.toDto(post));
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
+    public Post getPostById(@PathVariable Long id) {
+        return postService.getPostById(id);
     }
 
     @GetMapping("/{id}/comments")

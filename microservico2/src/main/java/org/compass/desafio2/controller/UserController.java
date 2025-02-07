@@ -26,7 +26,7 @@ public class UserController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Lista com todos os usuários cadastrados",
                             content = @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = User.class))))
+                                    array = @ArraySchema(schema = @Schema(implementation = User.class))))
             })
     @GetMapping
     public List<User> getAllUsers() {
@@ -37,10 +37,13 @@ public class UserController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = User.class)))),
+                                    array = @ArraySchema(schema = @Schema(implementation = User.class)))),
+                    @ApiResponse(responseCode = "400", description = "Requisição inválida",
+                            content = @Content(mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class)))),
                     @ApiResponse(responseCode = "404", description = "Recurso não encontrado",
                             content = @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class)))),
+                                    array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class))))
             })
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
