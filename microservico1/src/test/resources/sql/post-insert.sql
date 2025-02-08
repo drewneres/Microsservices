@@ -1,1 +1,0 @@
-INSERT INTO tb_post (id, user_id, title, body) VALUES (1, 1, 'post 1 criado', 'testando o post 1');
