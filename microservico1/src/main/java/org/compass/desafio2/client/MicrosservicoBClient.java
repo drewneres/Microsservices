@@ -25,9 +25,15 @@ public interface MicrosservicoBClient {
     @GetMapping("/api/posts/{id}/comments")
     List<Comment> getCommentsByPostId(@PathVariable Long id);
 
+    @GetMapping("/api/posts/{id}/comments")
+    List<Comment> getComments();
+
         // POST
     @PostMapping("/api/posts")
     Post createPost(@RequestBody Post post);
+
+    @PostMapping("/api/comments")
+    Comment createComment(@RequestBody Comment comment);
 
     // PUT (atualização completa)
     @PutMapping("/api/posts/{id}")
@@ -40,4 +46,7 @@ public interface MicrosservicoBClient {
     // DELETE
     @DeleteMapping("/api/posts/{id}")
     void deletePost(@PathVariable Long id);
+
+    @DeleteMapping("/api/comments/{id}")
+    void deleteComment(@PathVariable Long id);
 }
