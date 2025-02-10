@@ -3,9 +3,11 @@ package org.compass.desafio2.service;
 import org.compass.desafio2.client.JsonPlaceholderClient;
 import org.compass.desafio2.entity.Comment;
 import org.compass.desafio2.entity.Post;
+import org.compass.desafio2.exception.ConflictException;
 import org.compass.desafio2.exception.NotFoundException;
 import org.compass.desafio2.repository.CommentRepository;
 import org.compass.desafio2.repository.PostRepository;
+import org.compass.desafio2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
@@ -20,13 +22,15 @@ public class PostService {
     private final JsonPlaceholderClient jsonPlaceholderClient;
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
 
     public PostService(JsonPlaceholderClient jsonPlaceholderClient,
                        PostRepository postRepository,
-                       CommentRepository commentRepository) {
+                       CommentRepository commentRepository, UserRepository userRepository) {
         this.jsonPlaceholderClient = jsonPlaceholderClient;
         this.postRepository = postRepository;
         this.commentRepository = commentRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
@@ -53,17 +57,28 @@ public class PostService {
     }
 
     public Post savePost(Post post) {
+        if (!userRepository.existsById(post.getUserId())) {
+            throw new NotFoundException("Usuário", post.getUserId().toString());
+        }
+
+        if (post.getId() != null && postRepository.existsById(post.getId())) {
+            throw new ConflictException("Já existe um post com o ID " + post.getId());
+        }
         return postRepository.save(post);
     }
 
     public Post updatePost(Long id, Post updatedPost) {
         return postRepository.findById(id)
                 .map(post -> {
+                    if (!userRepository.existsById(updatedPost.getUserId())) {
+                        throw new NotFoundException("Usuário", updatedPost.getUserId().toString());
+                    }
                     post.setTitle(updatedPost.getTitle());
                     post.setBody(updatedPost.getBody());
+                    post.setUserId(updatedPost.getUserId());
                     return postRepository.save(post);
                 })
-                .orElse(null);
+                .orElseThrow(() -> new NotFoundException("Post", id.toString()));
     }
 
     public boolean deletePost(Long id) {

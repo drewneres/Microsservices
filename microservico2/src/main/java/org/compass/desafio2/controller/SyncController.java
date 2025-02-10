@@ -18,6 +18,10 @@ public class SyncController {
         this.syncService = syncService;
     }
 
+    @Operation(summary = "Sincronizar todos os dados da API externa", description = "Recurso para sincronizar todos od dados da API externa",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Dados sincronizados com sucesso")
+            })
     @PostMapping
     public ResponseEntity<String> syncAll() {
         try {

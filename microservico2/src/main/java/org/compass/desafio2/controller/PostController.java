@@ -37,7 +37,7 @@ public class PostController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Lista com todos os posts cadastrados",
                             content = @Content(mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = PostDto.class))))
+                            array = @ArraySchema(schema = @Schema(implementation = PostDto.class))))
             })
     @GetMapping
     public ResponseEntity<List<PostDto>> getAllPosts() {
@@ -51,25 +51,47 @@ public class PostController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = PostDto.class)))),
+                            array = @ArraySchema(schema = @Schema(implementation = PostDto.class)))),
                     @ApiResponse(responseCode = "400", description = "Requisição inválida",
                             content = @Content(mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class)))),
+                            array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class)))),
                     @ApiResponse(responseCode = "404", description = "Recurso não encontrado",
                             content = @Content(mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class))))
+                            array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class))))
             })
     @GetMapping("/{id}")
     public Post getPostById(@PathVariable Long id) {
         return postService.getPostById(id);
     }
-
+    @Operation(summary = "Recuperar os comentários pelo id de um post", description = "Recurso para recuperar os comentários pelo id de um post",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
+                            content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = PostDto.class)))),
+                    @ApiResponse(responseCode = "400", description = "Requisição inválida",
+                            content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class)))),
+                    @ApiResponse(responseCode = "404", description = "Recurso não encontrado",
+                            content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = ErrorMessage.class))))
+            })
     @GetMapping("/{id}/comments")
     public ResponseEntity<List<Comment>> getCommentsByPostId(@PathVariable Long id) {
         List<Comment> comments = postService.getAllCommentsByPostId(id);
         return ResponseEntity.ok(comments);
     }
 
+    @Operation(summary = "Criar um novo post", description = "Recurso para criar um novo post",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Recurso criado com sucesso",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = PostDto.class))),
+                    @ApiResponse(responseCode = "404", description = "Usuário não encontrado",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+                    @ApiResponse(responseCode = "409", description = "ID duplicado (conflito)",
+                            content = @Content(schema = @Schema(implementation = ErrorMessage.class))),
+                    @ApiResponse(responseCode = "422", description = "Dados de entrada invalidos",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+            })
     @PostMapping
     public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto) {
         Post post = postMapper.toEntity(postDto);
