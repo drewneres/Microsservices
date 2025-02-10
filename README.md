@@ -213,17 +213,27 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 
 - O projeto inclui a documentação da API utilizando **Swagger**, proporcionando uma interface interativa para explorar os endpoints disponíveis. O Swagger facilita a exploração e teste da API diretamente pelo navegador.
 - **A documentação pode ser acessada pelo link:** [http://localhost:8081/docs-micro2.html](http://localhost:8081/docs-micro2.html)
-- Endpoints Documentados
-Postagens
+- Endpoints Documentados:
+ 
+**Postagens**
    - GET /api/posts - Lista todos os posts cadastrados.
    - GET /api/posts/{id} - Recupera um post pelo ID.
    - POST /api/posts - Cria um novo post.
    - PUT /api/posts/{id} - Atualiza um post existente.
    - DELETE /api/posts/{id} - Remove um post.
 
-Comentários
+**Comentários**
    - GET /api/posts/{id}/comments - Retorna os comentários de um post.
    - DELETE /api/posts/{postId}/{commentId} - Remove um comentário específico de um post.
+
+Principais códigos de resposta da documentação swagger:
+   - 201 Created → Post criado com sucesso.
+   - 204 No Content → Post criado com sucesso.
+   - 200 OK → Post encontrado ou lista de posts retornada.
+   - 400 Bad Request → ID inválido.
+   - 404 Not Found → Usuário ou post não encontrado.
+   - 409 Conflict → ID já existente.
+   - 422 Unprocessable Entity → Dados inválidos.
 
 ---
 ## Testes
