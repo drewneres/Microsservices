@@ -45,6 +45,15 @@ public class ErrorMessage {
         addErrors(result, messageSource, request.getLocale());
     }
 
+    public ErrorMessage(HttpServletRequest request, HttpStatus status, String message, Map<String, String> errors) {
+        this.path = request.getRequestURI();
+        this.method = request.getMethod();
+        this.status = status.value();
+        this.statusText = status.getReasonPhrase();
+        this.message = message;
+        this.errors = errors;
+    }
+
     private void addErrors(BindingResult result, MessageSource messageSource, Locale locale) {
         this.errors = new HashMap<>();
         for (FieldError fieldError : result.getFieldErrors()) {

@@ -2,16 +2,19 @@ package org.compass.desafio2.controller.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.compass.desafio2.exception.BadRequestException;
-import org.compass.desafio2.exception.ConflictException;
-import org.compass.desafio2.exception.NotFoundException;
-import org.compass.desafio2.exception.UniqueViolationException;
+import org.compass.desafio2.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @RestControllerAdvice
@@ -73,5 +76,70 @@ public class ApiExceptionHandler {
                 ex.getMessage()
         );
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorMessage> handleValidationException(
+            MethodArgumentNotValidException ex,
+            HttpServletRequest request
+    ) {
+        BindingResult result = ex.getBindingResult();
+        Map<String, String> errors = new HashMap<>();
+
+        for (FieldError error : result.getFieldErrors()) {
+            String message = error.getDefaultMessage();
+            errors.put(error.getField(), message);
+        }
+
+        ErrorMessage errorMessage = new ErrorMessage(
+                request,
+                HttpStatus.UNPROCESSABLE_ENTITY,
+                "Erro de validação nos campos",
+                errors
+        );
+
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorMessage);
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<ErrorMessage> handleValidationException(
+            ValidationException ex,
+            HttpServletRequest request
+    ) {
+        ErrorMessage error = new ErrorMessage(
+                request,
+                HttpStatus.UNPROCESSABLE_ENTITY,
+                ex.getMessage(),
+                ex.getErrors()
+        );
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(error);
+    }
+
+    @ExceptionHandler(InternalServerErrorException.class)
+    public ResponseEntity<ErrorMessage> handleInternalServerError(
+            InternalServerErrorException ex,
+            HttpServletRequest request
+    ) {
+        log.error("Erro interno: ", ex);
+        ErrorMessage error = new ErrorMessage(
+                request,
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                "Ocorreu um erro inesperado. Tente novamente mais tarde."
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorMessage> handleGenericException(
+            Exception ex,
+            HttpServletRequest request
+    ) {
+        log.error("Erro não tratado: ", ex);
+        ErrorMessage error = new ErrorMessage(
+                request,
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                "Erro interno no servidor. Contate o suporte."
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 }
