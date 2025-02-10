@@ -120,22 +120,22 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 #### Sincronização Completa
 - Se você deseja sincronizar todos os dados da API e enviá-los para o banco de dados de uma vez, utilize o seguinte endpoint:
   - **Método:** `POST`
-  - **URL:** `http://localhost:8080/api/sync-data`
+  - **URL:** `http://localhost:8081/api/sync-data`
 
 #### Sincronização Individual
 - Caso prefira sincronizar os dados separadamente, você pode utilizar os seguintes endpoints:
 
   - **Sincronizar Posts da API e enviar para o BD:**
     - **Método:** `POST`
-    - **URL:** `http://localhost:8080/api/sync/posts`
+    - **URL:** `http://localhost:8081/api/sync/posts`
 
   - **Sincronizar Comments da API e enviar para o BD:**
     - **Método:** `POST`
-    - **URL:** `http://localhost:8080/api/sync/comments`
+    - **URL:** `http://localhost:8081/api/sync/comments`
 
   - **Sincronizar Users da API e enviar para o BD:**
     - **Método:** `POST`
-    - **URL:** `http://localhost:8080/api/sync/users`
+    - **URL:** `http://localhost:8081/api/sync/users`
 
 ---
 
