@@ -49,8 +49,8 @@ mvn clean install
 mvn spring-boot:run
 ```
 ### Executando pela IDE  
-- Você também pode rodar a aplicação diretamente pela IDE.  
--    No **Micro B**, localize e execute a classe **`MicroBApplication`**.  
+- Você também pode rodar a aplicação diretamente pela IDE. Localize na main os seguintes arquivos:
+-    No **Micro B**, localize e execute a classe **`MicrosservicoBApplication`**.  
 -    No **Micro A**, localize e execute a classe **`MicrosservicoAApplication`**.  
 
 >  **Importante:** Para o funcionamento correto da aplicação, ambos os microsserviços devem estar em execução simultaneamente. **Recomendação:** Execute primeiro o Microsserviço B e, em seguida, o Microsserviço A.  
