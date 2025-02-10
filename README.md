@@ -104,10 +104,10 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 ## Endpoints
 
 ### Microsserviço A (Porta 8080)
-![image](https://github.com/user-attachments/assets/b2636195-a52e-48e5-9e7b-010348ad3412)
+![image](https://github.com/user-attachments/assets/af46c9cf-d136-48d1-9382-e446236e55d3)
 
 ### Microsserviço B (Porta 8081)
-![image](https://github.com/user-attachments/assets/93829131-e962-43fe-9404-973d591ca51b)
+![image](https://github.com/user-attachments/assets/2d10a2aa-1f65-4309-86b6-99e8cd8f782f)
 
 ---
 
