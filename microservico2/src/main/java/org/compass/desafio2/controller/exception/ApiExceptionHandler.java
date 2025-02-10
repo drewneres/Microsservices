@@ -3,6 +3,7 @@ package org.compass.desafio2.controller.exception;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.compass.desafio2.exception.BadRequestException;
+import org.compass.desafio2.exception.ConflictException;
 import org.compass.desafio2.exception.NotFoundException;
 import org.compass.desafio2.exception.UniqueViolationException;
 import org.springframework.http.HttpStatus;
@@ -59,5 +60,18 @@ public class ApiExceptionHandler {
 
         BadRequestException badRequestEx = new BadRequestException(errorMessage);
         return badRequestException(badRequestEx, request);
+    }
+
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<ErrorMessage> handleConflictException(
+            ConflictException ex,
+            HttpServletRequest request
+    ) {
+        ErrorMessage error = new ErrorMessage(
+                request,
+                HttpStatus.CONFLICT,
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 }
