@@ -1,6 +1,8 @@
 package org.compass.desafio2.controller;
 
 import org.compass.desafio2.client.MicrosservicoBClient;
+import org.compass.desafio2.exception.EntityNotFoundException;
+import org.compass.desafio2.exception.UniqueViolationException;
 import org.compass.desafio2.model.Post;
 import org.compass.desafio2.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +25,32 @@ public class PostController {
 
     @GetMapping("/{id}")
     public Post getPostById(@PathVariable Long id) {
-        return microsservicoBClient.getPostById(id);
+        try{
+            return microsservicoBClient.getPostById(id);
+        }
+        catch (RuntimeException e) {
+            throw new EntityNotFoundException("Post not found");
+        }
     }
 
     @GetMapping("/{id}/comments")
     public List<Comment> getCommentsByPostId(@PathVariable Long id) {
-        return microsservicoBClient.getCommentsByPostId(id);
+        try {
+            return microsservicoBClient.getCommentsByPostId(id);
+        }
+        catch (RuntimeException e) {
+            throw new EntityNotFoundException("Post not found");
+        }
     }
 
     @PostMapping
     public Post createPost(@RequestBody Post post) {
-        return microsservicoBClient.createPost(post);
+        try {
+            return microsservicoBClient.createPost(post);
+        }
+        catch (RuntimeException e) {
+            throw new UniqueViolationException("Post Id already exists");
+        }
     }
 
 
@@ -44,6 +61,11 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     public void deletePost(@PathVariable Long id) {
-        microsservicoBClient.deletePost(id);
+        try {
+            microsservicoBClient.deletePost(id);
+        }
+        catch (RuntimeException e) {
+            throw new EntityNotFoundException("Post not found");
+        }
     }
 }

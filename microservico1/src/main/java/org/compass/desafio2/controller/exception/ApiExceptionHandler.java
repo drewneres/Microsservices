@@ -18,7 +18,7 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorMessage> entityNotFoundException(EntityNotFoundException ex, HttpServletRequest request) {
-        String msg = "Recurso " + ex.getResource() + " com ID " + ex.getCode() + " não encontrado.";
+        String msg = "Id not found";
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .contentType(MediaType.APPLICATION_JSON)
