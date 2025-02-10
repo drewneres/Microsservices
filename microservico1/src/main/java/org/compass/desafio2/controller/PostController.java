@@ -30,25 +30,18 @@ public class PostController {
     public List<Comment> getCommentsByPostId(@PathVariable Long id) {
         return microsservicoBClient.getCommentsByPostId(id);
     }
-    // POST (Criar Post)
+
     @PostMapping
     public Post createPost(@RequestBody Post post) {
         return microsservicoBClient.createPost(post);
     }
 
-    // PUT (Atualizar Post Completo)
+
     @PutMapping("/{id}")
     public Post updatePost(@PathVariable Long id, @RequestBody Post post) {
         return microsservicoBClient.updatePost(id, post);
     }
-//
-//    // PATCH (Atualizar Parcialmente o Post)
-//    @PatchMapping("/{id}")
-//    public Post patchPost(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
-//        return microsservicoBClient.patchPost(id, updates);
-//    }
 
-    // DELETE (Excluir Post)
     @DeleteMapping("/{id}")
     public void deletePost(@PathVariable Long id) {
         microsservicoBClient.deletePost(id);

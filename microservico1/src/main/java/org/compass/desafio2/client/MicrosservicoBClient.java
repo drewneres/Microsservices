@@ -2,6 +2,7 @@ package org.compass.desafio2.client;
 
 import org.compass.desafio2.model.Post;
 import org.compass.desafio2.model.Comment;
+import org.compass.desafio2.web.dto.CommentDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,9 @@ public interface MicrosservicoBClient {
     // PUT (atualização completa)
     @PutMapping("/api/posts/{id}")
     Post updatePost(@PathVariable Long id, @RequestBody Post post);
+
+    @PutMapping("/api/posts/{id}/comments/{id}")
+    Comment updateComment(@PathVariable Long id, @RequestBody CommentDto commentDto);
 
 //    // PATCH (atualização parcial)
 //    @PatchMapping("/api/posts/{id}")
