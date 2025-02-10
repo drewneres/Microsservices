@@ -49,6 +49,8 @@ mvn clean install
 mvn spring-boot:run
 ```
 
+- Importante: Os dois microsserviços devem estarem rodando simultaneamente para funcionar a aplicação corretamente.
+    
 ---
 
 ## Configuração
@@ -78,6 +80,19 @@ springdoc.swagger-ui.path=/docs-micro2.html
 springdoc.api-docs.path=/docs-micro2
 springdoc.packagesToScan=org.compass.desafio2.controller
 ```
+
+### Acesso ao Banco de Dados H2  
+
+Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo seguinte endereço:  
+
+ - URL: [http://localhost:8081/h2-console](http://localhost:8081/h2-console)
+ - JDBC URL: `jdbc:h2:mem:micro2-console`  
+
+### Credenciais de Acesso  
+- Usuário: `grupo4`  
+- Senha: *(deixe em branco)*  
+
+>  **Observação:** Certifique-se de que a aplicação está em execução para acessar o banco de dados.
 
 ---
 
@@ -166,19 +181,24 @@ springdoc.packagesToScan=org.compass.desafio2.controller
 ## Microsserviço B
 
 Salvar dados da API e sincronizar com o BD:
+
+- Sincronizar todos os dados da API e enviar pro BD:
+  - **Método:** `POST`
+   - **URL:** `http://localhost:8080/api/sync`
+
 - Sincronizar Posts da API e enviar pro BD:
   - **Método:** `POST`
-- **URL:** `http://localhost:8080/api/sync/posts`
+   - **URL:** `http://localhost:8080/api/sync/posts`
 
 - Sincronizar Comments da API e enviar pro BD:
   - **Método:** `POST`
-- **URL:** `http://localhost:8080/api/sync/comments`
+   - **URL:** `http://localhost:8080/api/sync/comments`
 
 - Sincronizar Users da API e enviar pro BD:
   - **Método:** `POST`
-- **URL:** `http://localhost:8080/api/sync/users`
+   - **URL:** `http://localhost:8080/api/sync/users`
 
-Os endpoints mostrados anteriormente, também funciona no microsserviço B, o que muda é apenas a porta: 8081.
+> Obs: Os endpoints mostrados anteriormente, também funciona no microsserviço B, o que muda é apenas a porta: 8081.
 
 ---
 ## Testes
