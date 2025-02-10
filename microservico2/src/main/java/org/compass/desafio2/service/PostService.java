@@ -6,11 +6,13 @@ import org.compass.desafio2.entity.Post;
 import org.compass.desafio2.exception.NotFoundException;
 import org.compass.desafio2.repository.CommentRepository;
 import org.compass.desafio2.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -71,6 +73,20 @@ public class PostService {
         } else {
             return false;
         }
+    }
+
+    public boolean deleteComment(Long postId, Long commentId) {
+        Optional<Comment> commentOptional = commentRepository.findById(commentId);
+
+        if (commentOptional.isPresent()) {
+            Comment comment = commentOptional.get();
+
+            if (comment.getPostId().equals(postId)) {
+                commentRepository.delete(comment);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

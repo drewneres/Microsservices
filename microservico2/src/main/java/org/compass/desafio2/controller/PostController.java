@@ -98,4 +98,17 @@ public class PostController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+    @DeleteMapping("/{postId}/{commentId}")
+    public ResponseEntity<Void> deleteComment(@PathVariable Long postId, @PathVariable Long commentId) {
+        boolean deleteComment = postService.deleteComment(postId, commentId);
+
+        if (deleteComment) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
