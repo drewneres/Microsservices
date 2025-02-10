@@ -75,4 +75,20 @@ public class SyncService {
 
         logger.info("Users synchronization completed successfully.");
     }
+
+    @Transactional
+    public void syncEverything() {
+        logger.info("Starting full data synchronization...");
+
+        try {
+            syncPosts();
+            syncComments();
+            syncUsers();
+            logger.info("Full data synchronization completed successfully.");
+        } catch (Exception e) {
+            logger.error("Error occurred during full data synchronization: {}", e.getMessage(), e);
+            throw new RuntimeException("Synchronization failed.", e);
+        }
+    }
+
 }

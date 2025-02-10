@@ -3,6 +3,7 @@ package org.compass.desafio2.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.compass.desafio2.service.SyncService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,16 @@ public class SyncController {
 
     public SyncController(SyncService syncService) {
         this.syncService = syncService;
+    }
+
+    @PostMapping
+    public ResponseEntity<String> syncAll() {
+        try {
+            syncService.syncEverything();
+            return ResponseEntity.ok("All data synchronized successfully!");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error synchronizing data: " + e.getMessage());
+        }
     }
 
     @Operation(summary = "Sincronizar dados de Posts da API externa", description = "Recurso para sincronizar dados de Posts da API externa",
