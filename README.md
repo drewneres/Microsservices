@@ -48,9 +48,14 @@ cd desafio2/microsservico-a
 mvn clean install
 mvn spring-boot:run
 ```
+### Executando pela IDE  
+- Você também pode rodar a aplicação diretamente pela IDE.  
+-    No **Micro B**, localize e execute a classe **`MicroBApplication`**.  
+-    No **Micro A**, localize e execute a classe **`MicrosservicoAApplication`**.  
 
-- Importante: Os dois microsserviços devem estarem rodando simultaneamente para funcionar a aplicação corretamente.
-    
+>  **Importante:** Para o funcionamento correto da aplicação, ambos os microsserviços devem estar em execução simultaneamente. **Recomendação:** Execute primeiro o Microsserviço B e, em seguida, o Microsserviço A.  
+> **Dica:** Antes de iniciar os microsserviços, verifique se todas as dependências estão configuradas corretamente.
+
 ---
 
 ## Configuração
@@ -107,6 +112,32 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 ---
 
 ## Testando os Endpoints
+
+### Sincronizando Dados no Microsserviço B
+
+- Como o **Microsserviço A** depende do **Microsserviço B**, é fundamental rodar a sincronização de dados no **Microsserviço B** para garantir que as informações sejam corretamente persistidas no banco de dados.
+
+#### Sincronização Completa
+- Se você deseja sincronizar todos os dados da API e enviá-los para o banco de dados de uma vez, utilize o seguinte endpoint:
+  - **Método:** `POST`
+  - **URL:** `http://localhost:8080/api/sync`
+
+#### Sincronização Individual
+- Caso prefira sincronizar os dados separadamente, você pode utilizar os seguintes endpoints:
+
+  - **Sincronizar Posts da API e enviar para o BD:**
+    - **Método:** `POST`
+    - **URL:** `http://localhost:8080/api/sync/posts`
+
+  - **Sincronizar Comments da API e enviar para o BD:**
+    - **Método:** `POST`
+    - **URL:** `http://localhost:8080/api/sync/comments`
+
+  - **Sincronizar Users da API e enviar para o BD:**
+    - **Método:** `POST`
+    - **URL:** `http://localhost:8080/api/sync/users`
+
+---
 
 ### Exemplo: Criar um Post (Microsserviço A)
 
@@ -175,30 +206,6 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 #### Via Postman:
 - **Método:** `DELETE`
 - **URL:** `http://localhost:8080/api/posts/1`
-
----
-
-## Microsserviço B
-
-Salvar dados da API e sincronizar com o BD:
-
-- Sincronizar todos os dados da API e enviar pro BD:
-  - **Método:** `POST`
-   - **URL:** `http://localhost:8080/api/sync`
-
-- Sincronizar Posts da API e enviar pro BD:
-  - **Método:** `POST`
-   - **URL:** `http://localhost:8080/api/sync/posts`
-
-- Sincronizar Comments da API e enviar pro BD:
-  - **Método:** `POST`
-   - **URL:** `http://localhost:8080/api/sync/comments`
-
-- Sincronizar Users da API e enviar pro BD:
-  - **Método:** `POST`
-   - **URL:** `http://localhost:8080/api/sync/users`
-
-> Obs: Os endpoints mostrados anteriormente, também funciona no microsserviço B, o que muda é apenas a porta: 8081.
 
 ---
 ## Testes
