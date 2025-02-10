@@ -53,7 +53,7 @@ public class CommentIT {
 
     @Test
     public void createComment_IdAlreadyExists_ReturnErrorMessageWithStatus409() {
-        Comment newComment = new Comment(10L, "test create comment 10","test@gmail.com", "test creating comment 10 in post 1",1L);
+        Comment newComment = new Comment(1L, "test create comment 10","test@gmail.com", "test creating comment 10 in post 1",1L);
 
         ErrorMessage responseBody = testClient
                 .post()
