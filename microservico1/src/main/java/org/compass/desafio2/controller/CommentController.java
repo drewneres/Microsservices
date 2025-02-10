@@ -2,6 +2,7 @@ package org.compass.desafio2.controller;
 
 import org.compass.desafio2.client.MicrosservicoBClient;
 import org.compass.desafio2.model.Comment;
+import org.compass.desafio2.web.dto.CommentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,10 @@ public class CommentController {
         return microsservicoBClient.createComment(comment);
     }
 
-    //put, precisa do Dto
+    @PutMapping("/{id}")
+    public Comment updateComment(@PathVariable Long id, @RequestBody CommentDto commentDto) {
+        return microsservicoBClient.updateComment(id, commentDto);
+    }
 
     @DeleteMapping("/{id}")
     public void deleteComment(@PathVariable Long id) {
