@@ -90,7 +90,7 @@ springdoc.packagesToScan=org.compass.desafio2.controller
 
 Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo seguinte endereço:  
 
- - URL: [http://localhost:8081/h2-console](http://localhost:8081/h2-console)
+ - URL: [http://localhost:8081/micro2-console](http://localhost:8081/micro2-console)
  - JDBC URL: `jdbc:h2:mem:micro2-console`  
 
 ### Credenciais de Acesso  
@@ -120,7 +120,7 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 #### Sincronização Completa
 - Se você deseja sincronizar todos os dados da API e enviá-los para o banco de dados de uma vez, utilize o seguinte endpoint:
   - **Método:** `POST`
-  - **URL:** `http://localhost:8080/api/sync`
+  - **URL:** `http://localhost:8080/api/sync-data`
 
 #### Sincronização Individual
 - Caso prefira sincronizar os dados separadamente, você pode utilizar os seguintes endpoints:
@@ -208,6 +208,13 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 - **URL:** `http://localhost:8080/api/posts/1`
 
 ---
+
+## Documentação da API  - Swagger
+
+- O projeto inclui a documentação da API utilizando **Swagger**, proporcionando uma interface interativa para explorar os endpoints disponíveis.  
+- **A documentação pode ser acessada pelo link:** [http://localhost:8081/docs-micro2.html](http://localhost:8081/docs-micro2.html)
+
+---
 ## Testes
 
 - Durante a fase de testes, foram validados diversos cenários para garantir a  confiabilidade da aplicação. 
@@ -233,7 +240,7 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 
 ## Notas Adicionais
 
-- O console do H2 está disponível em `http://localhost:8081/h2-console` (JDBC URL: `jdbc:h2:mem:micro2-console`).
+- O console do H2 está disponível em `http://localhost:8081/micro2-console` (JDBC URL: `jdbc:h2:mem:micro2-console`).
    - Credenciais:
       - Username: `grupo4`
       - Password: (vazio)
