@@ -107,7 +107,7 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 ![image](https://github.com/user-attachments/assets/af46c9cf-d136-48d1-9382-e446236e55d3)
 
 ### Microsserviço B (Porta 8081)
-![image](https://github.com/user-attachments/assets/2d10a2aa-1f65-4309-86b6-99e8cd8f782f)
+![image](https://github.com/user-attachments/assets/af46c9cf-d136-48d1-9382-e446236e55d3)
 
 ---
 
