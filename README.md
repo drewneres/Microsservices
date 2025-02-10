@@ -211,8 +211,19 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 
 ## Documentação da API  - Swagger
 
-- O projeto inclui a documentação da API utilizando **Swagger**, proporcionando uma interface interativa para explorar os endpoints disponíveis.  
+- O projeto inclui a documentação da API utilizando **Swagger**, proporcionando uma interface interativa para explorar os endpoints disponíveis. O Swagger facilita a exploração e teste da API diretamente pelo navegador.
 - **A documentação pode ser acessada pelo link:** [http://localhost:8081/docs-micro2.html](http://localhost:8081/docs-micro2.html)
+- Endpoints Documentados
+Postagens
+   - GET /api/posts - Lista todos os posts cadastrados.
+   - GET /api/posts/{id} - Recupera um post pelo ID.
+   - POST /api/posts - Cria um novo post.
+   - PUT /api/posts/{id} - Atualiza um post existente.
+   - DELETE /api/posts/{id} - Remove um post.
+
+Comentários
+   - GET /api/posts/{id}/comments - Retorna os comentários de um post.
+   - DELETE /api/posts/{postId}/{commentId} - Remove um comentário específico de um post.
 
 ---
 ## Testes
@@ -235,7 +246,8 @@ Para visualizar os dados armazenados no banco de dados H2, acesse o console pelo
 - H2
 - Maven
 - JSONPlaceholder API
-
+- Swagger
+  
 ---
 
 ## Notas Adicionais

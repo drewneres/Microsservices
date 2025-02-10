@@ -63,7 +63,8 @@ public class PostController {
     public Post getPostById(@PathVariable Long id) {
         return postService.getPostById(id);
     }
-    @Operation(summary = "Recuperar os comentários pelo id de um post", description = "Recurso para recuperar os comentários pelo id de um post",
+    @Operation(summary = "Recuperar os comentários pelo id de um post",
+            description = "Recurso para recuperar os comentários pelo id de um post",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Recurso recuperado com sucesso",
                             content = @Content(mediaType = "application/json",
@@ -99,6 +100,17 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(postMapper.toDto(savedPost));
     }
 
+    @Operation(summary = "Atualizar um post",
+            description = "Recurso para atualizar um post existente",
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "Post atualizado com sucesso"),
+                    @ApiResponse(responseCode = "400", description = "Dados inválidos",
+                            content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorMessage.class))),
+                    @ApiResponse(responseCode = "404", description = "Post ou usuário não encontrado",
+                            content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorMessage.class)))
+            })
     @PutMapping("/{id}")
     public ResponseEntity<Void> updatePost(@PathVariable Long id, @Valid @RequestBody PostDto postDto) {
         Post updatedPost = postService.updatePost(id, postMapper.toEntity(postDto));
@@ -109,7 +121,14 @@ public class PostController {
         }
     }
 
-
+    @Operation(summary = "Excluir um post",
+            description = "Recurso para excluir um post pelo ID",
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "Post excluído com sucesso"),
+                    @ApiResponse(responseCode = "404", description = "Post não encontrado",
+                            content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorMessage.class)))
+            })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         boolean deletePost = postService.deletePost(id);
@@ -121,7 +140,14 @@ public class PostController {
         }
     }
 
-
+    @Operation(summary = "Excluir um comentário",
+            description = "Recurso para excluir um comentário específico de um post",
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "Comentário excluído com sucesso"),
+                    @ApiResponse(responseCode = "404", description = "Post ou comentário não encontrado",
+                            content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorMessage.class)))
+            })
     @DeleteMapping("/{postId}/{commentId}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long postId, @PathVariable Long commentId) {
         boolean deleteComment = postService.deleteComment(postId, commentId);

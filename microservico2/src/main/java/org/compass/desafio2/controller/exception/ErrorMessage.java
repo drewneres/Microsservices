@@ -1,6 +1,7 @@
 package org.compass.desafio2.controller.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Map;
 @NoArgsConstructor
 @Getter
 @ToString
+@Schema(name = "ErrorMessage", description = "Modelo padrão para respostas de erro")
 public class ErrorMessage {
     private String path;
     private String method;
