@@ -1,4 +1,4 @@
-# Desafio 2: Microsserviços com Spring Boot e OpenFeign
+# Microsserviços com Spring Boot e OpenFeign
 
 Este projeto consiste em dois microsserviços (**Microsserviço A** e **Microsserviço B**) que se comunicam para consumir dados da API [JSONPlaceholder](https://jsonplaceholder.typicode.com). O objetivo é oferecer uma solução integrada para operações CRUD em posts e comentários.
 
